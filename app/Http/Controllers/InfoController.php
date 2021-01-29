@@ -13,7 +13,13 @@ class InfoController extends Controller
             'clickid' => ['required', 'string']
         ]);
 
-        return DB::table('clickid')->where('clickid', $request->get('clickid'))->get();
+        $data = DB::table('clickid')->where('clickid', $request->get('clickid'))->get();
+        
+        if ($data->empty()) {
+            abort(404);
+        }
+
+        return $data;
     }
 
     public function store(Request $request)
