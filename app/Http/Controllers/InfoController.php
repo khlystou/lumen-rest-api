@@ -9,7 +9,7 @@ class InfoController extends Controller
 {
     public function index(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'clickid' => ['required', 'string']
         ]);
 
@@ -18,7 +18,7 @@ class InfoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'clickid' => ['required', 'string'],
             'event' => ['string'],
             'type' => ['string'],
