@@ -27,7 +27,7 @@ class InfoController extends Controller
             'reg' => ['integer']
         ]);
 
-        return DB::table('clickid')->create(
+        return DB::table('clickid')->insert(
             $request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg'])
         );
     }
