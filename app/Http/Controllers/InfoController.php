@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ClickId;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class InfoController extends Controller
 {
@@ -13,13 +13,7 @@ class InfoController extends Controller
             'clickid' => ['required', 'string']
         ]);
 
-        $data = DB::table('clickid')->where('clickid', $request->get('clickid'))->get();
-        
-        if ($data->empty()) {
-            abort(404);
-        }
-
-        return $data;
+        return ClickId::where('clickid', $request->get('clickid'))->get();
     }
 
     public function store(Request $request)
@@ -33,8 +27,17 @@ class InfoController extends Controller
             'reg' => ['integer']
         ]);
 
-        return DB::table('clickid')->insert(
-            $request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg'])
-        );
+        if ($request->query('clickid')) {
+            ClickId::where('clickid', $request->get('clickid'))->update(
+                $request->only(['event', 'type', 'app_id', 'sell', 'reg'])
+            );
+        }
+        else {
+            ClickId::create(
+                $request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg'])
+            );
+        }
+
+        return ['status' => 'success'];
     }
 }
