@@ -9,7 +9,7 @@ class CreateClickidTable extends Migration
     public function up()
     {
         Schema::create('clickid', function (Blueprint $table) {
-            $table->string('clickid', 40)->default(1);
+            $table->string('clickid', 40)->default(1)->primary();
             $table->string('event', 40)->nullable();
             $table->string('type', 40)->nullable();
             $table->string('app_id', 100)->nullable();
