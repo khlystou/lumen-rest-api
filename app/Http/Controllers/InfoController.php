@@ -27,10 +27,14 @@ class InfoController extends Controller
             'reg' => ['integer']
         ]);
 
-        ClickId::updateOrCreate(
-            ['clickid' => $request->get('clickid')], 
-            $request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg'])
-        );
+        $model = ClickId::where('clickid', $request->get('clickid'))->first();
+
+        if ($model !== null) {
+            $model->update($request->only(['event', 'type', 'app_id', 'sell', 'reg']));
+        }
+        else {
+            ClickId::create($request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg']));
+        }
 
         return ['status' => 'success'];
     }
