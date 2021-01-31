@@ -32,15 +32,6 @@ class InfoController extends Controller
             $request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg'])
         );
 
-        // $exists = ClickId::where('clickid', $request->get('click'))->exists();
-
-        // if ($exists) {
-        //     ClickId::where('clickid', $request->get('click'))->update($request->only(['event', 'type', 'app_id', 'sell', 'reg']));
-        // }
-        // else {
-        //     ClickId::create($request->only(['clickid', 'event', 'type', 'app_id', 'sell', 'reg']));
-        // }
-
         return ['status' => 'success'];
     }
 }
