@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class clickid extends Model
+class ClickId extends Model
 {
     protected $table = 'clickid';
     protected $primaryKey = 'clickid';
